@@ -19,6 +19,9 @@ class LLMClient(object):
                                       api_key=self.api_key,
                                       base_url=self.base_url)
 
+    def init_client(self):
+        return self.client
+
     def invoke(self, message):
         return self.client.invoke(message).content
 
