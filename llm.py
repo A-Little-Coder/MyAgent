@@ -26,10 +26,14 @@ class LLMClient(object):
         return self.client.invoke(message).content
 
     def stream(self, message):
+        ans = ""
         for chunk in self.client.stream(message):
+            ans += chunk.content
             print(chunk.content, end="", flush=True)  # flush实现实时输出
+        return ans
 
 if __name__ == '__main__':
     llm = LLMClient(model="qwen3-vl-plus")
     # print(llm.invoke([HumanMessage("你好，请问你是谁？")]))
-    llm.stream([HumanMessage("你好，请问你是谁？")])
+    a = llm.stream([HumanMessage("你好，请问你是谁？")])
+    print(a)
